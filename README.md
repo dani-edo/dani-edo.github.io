@@ -1,5 +1,9 @@
 # TicTacToe Game
-This project is a TicTacToe game generator for all sizes. The number of rows and columns depends on the amount entered by the user.
+This project is a TicTacToe Game Generator for all sizes. The number of rows and columns depends on the amount entered by the user.
+
+## Dependencies
+1. Bootstrap 4.4.1 [Front End Framework (Styling)]
+2. Jquery 1.7.2 [Javascript Library]
 
 ## Try this!
 If you want run this project, all you have to do is:
