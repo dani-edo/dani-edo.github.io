@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tic Tac Toe game</title>
+
+    <!-- <link
+      rel="stylesheet prefetch"
+      href="https://getbootstrap.com/2.3.2/assets/css/bootstrap.css"
+    /> -->
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div id="tic-tac-toe">
+      <div class="span3 new_span">
+        <div class="row my-3">
+          <div class="col-12">
+            <h1 class="d-block">Tic Tac Toe</h1>
+            <form id="column_set" class="hide-for-play">
+              <div class="form-group mb-3 w-100">
+                <label for="column_set_input" class="text-center mb-2"
+                  >Please input the number of rows/columns</label
+                >
+                <input
+                  type="number"
+                  class="form-control w-100"
+                  id="column_set_input"
+                  placeholder="column_set"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary mb-2 w-100">
+                Ok
+              </button>
+            </form>
+          </div>
+          <div class="col-12 show-for-play">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text font-weight-bold">O won</div>
+              </div>
+              <input
+                id="o_win"
+                type="text"
+                class="form-control result"
+                value="0"
+                readonly
+              />
+              <div class="input-group-append">
+                <div class="input-group-text">time(s)</div>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text font-weight-bold">X won</div>
+              </div>
+              <input
+                id="x_win"
+                type="text"
+                class="form-control result"
+                value="0"
+                readonly
+              />
+              <div class="input-group-append">
+                <div class="input-group-text">time(s)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="show-for-play">
+          <ul class="d-flex flex-wrap" id="game"></ul>
+          <div class="clr">&nbsp;</div>
+          <div class="row">
+            <div class="col">
+              <a href="#" id="reset" class="btn-success btn span3">Restart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+    <script src="js/index.js"></script>
+  </body>
+</html>
