@@ -12,3 +12,6 @@ If you want run this project, all you have to do is:
 3. Open index.html file
 4. Input the number of rows/columns
 5. Enjoy the game!
+
+## App Result
+You can see this app result instantly at this page : https://dani-edo.github.io
