@@ -3,15 +3,18 @@ $(document).ready(function () {
     // Variable init --------------------------------------------------------------------------------------------
     var x = "x",
         o = "o",
-        count = o_win = x_win = column_set = 0;
+        count = o_win = x_win = column_set = rule_win = 0;
 
     // Event --------------------------------------------------------------------------------------------
     $('form#column_set').submit(function (e) {
         e.preventDefault();
-        column_set = parseInt($(this).find('input').val())
-        $('.hide-for-play').hide()
-        $('.show-for-play').show()
-        init()
+        column_set = parseInt($(this).find('#column_set_input').val())
+        rule_win  = parseInt($(this).find('#rule_win_set_input').val())
+        if (rule_win > column_set) {
+            alert('maximum number of rule win is the number of rows/columns')
+        } else {
+            init()
+        }
     })
 
     $(document).on('click', '#game li', function () {
@@ -37,6 +40,8 @@ $(document).ready(function () {
                 $('#game').append('<li class="btn span1" data-row="' + i + '" data-column="' + j + '">+</li>')
             }
         }
+        $('.hide-for-play').hide()
+        $('.show-for-play').show()
         $('.new_span').width(75 * column_set + 'px')
         $('#tic-tac-toe #game li').width(100 / column_set - 1 + '%')
     }
@@ -44,33 +49,40 @@ $(document).ready(function () {
     function win_test(el, kind) {
         var row = el.data('row'),
             column = el.data('column'),
-            row_win = column_win = diagonal_win = right = left = true;
+            sum = row + column,
+            difference = row - column,
+            row_win = column_win = diagonal_win = right = left = true,
+            column_kind_set = [], row_kind_set = [], right_kind_set = [], left_kind_set = [];
 
         count++
         el.text(kind).addClass('disable ' + kind + ' ' + (kind == 'o' ? 'btn-primary' : 'btn-info'))
 
         $('[data-row=' + row + ']').map((i, e) => {
-            if (!$(e).hasClass(kind)) {
-                row_win = false
+            if ($(e).hasClass(kind)) {
+                column_kind_set.push($(e).data('column'))
             }
         })
+        row_win = order_test(column_kind_set)
 
         $('[data-column=' + column + ']').map((i, e) => {
-            if (!$(e).hasClass(kind)) {
-                column_win = false
+            if ($(e).hasClass(kind)) {
+                row_kind_set.push($(e).data('row'))
             }
         })
+        column_win = order_test(row_kind_set)
 
         $(document).find("#game li").map((i, e) => {
             let this_row = $(e).data('row'), this_column = $(e).data('column');
-            if (this_row === this_column && !$(e).hasClass(kind)) {
-                right = false
+            if (this_row - this_column === difference && $(e).hasClass(kind)) {
+                right_kind_set.push(this_row)
             }
-            if (this_row + this_column == 1 + column_set && !$(e).hasClass(kind)) {
-                left = false
+            if (this_row + this_column == sum && $(e).hasClass(kind)) {
+                left_kind_set.push(this_column)
             }
-            diagonal_win = right || left
         })
+        right = order_test(right_kind_set)
+        left = order_test(left_kind_set.sort())
+        diagonal_win = right || left
 
         if (row_win || column_win || diagonal_win) {
             alert(kind + ' win!')
@@ -92,5 +104,30 @@ $(document).ready(function () {
     function reset() {
         $("#game li").removeClass('disable o x btn-primary btn-info').text("+");
         count = 0
+    }
+
+    function order_test(e) {
+        var order_old = e[0], valid = false, 
+            logical_order = [], array_true = [];
+
+        if (e.length < rule_win) {
+            valid = false
+        } else {
+            e.map((order) => {
+                logical_order.push(order_old === order - 1)
+                order_old = order
+            })
+            logical_order.map((e)=> {
+                if (e) {
+                    array_true.push(e)
+                } else {
+                    array_true = []
+                }
+                if (array_true.length === rule_win - 1) {
+                    valid = true
+                }
+            })
+        }
+        return valid
     }
 });

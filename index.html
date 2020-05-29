@@ -27,14 +27,26 @@
             <h1 class="d-block">Tic Tac Toe</h1>
             <form id="column_set" class="hide-for-play">
               <div class="form-group mb-3 w-100">
-                <label for="column_set_input" class="text-center mb-2"
-                  >Please input the number of rows/columns</label
+                <label for="column_set_input" class="text-center mb-2 w-100"
+                  >Number of rows/columns</label
                 >
                 <input
                   type="number"
                   class="form-control w-100"
                   id="column_set_input"
                   placeholder="column_set"
+                  required
+                />
+              </div>
+              <div class="form-group mb-3 w-100">
+                <label for="rule_win_set_input" class="text-center mb-2 w-100"
+                  >Number of rule win</label
+                >
+                <input
+                  type="number"
+                  class="form-control w-100"
+                  id="rule_win_set_input"
+                  placeholder="rule_win"
                   required
                 />
               </div>
